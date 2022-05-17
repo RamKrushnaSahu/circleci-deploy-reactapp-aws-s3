@@ -1,0 +1,58 @@
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Installing linting tool"
+          command: echo "Installation Successful"
+      - run:
+          name: "Run linting on the Root directory"
+          command: echo "Linting Run Successful"
+          working_directory: "./"
+  test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Run unit Tests"
+          command: echo "Unit Tests Passed"
+      - run:
+          name: "Run Integration Tests"
+          command: echo "Integration Tests Passed"
+  build:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Build docker Image"
+          command: echo "Image Successfully Built"
+      - run:
+          name: "Publish Image"
+          command: echo "Image successfully published"  # ECR/Docker registry/etc
+  deploy:
+    docker:
+      - image: alpine:latest
+      - run:
+          name: "Deploy image using ____"
+          command: echo "Image deployed Successfully"  # awscli commands/create and upgrade helm charts/etc
+
+workflows:
+  test_build_deploy:
+    jobs:
+      - lint
+      - test:
+          requires:
+            - lint
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
+
