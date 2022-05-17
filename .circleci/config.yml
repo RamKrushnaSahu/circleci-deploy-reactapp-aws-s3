@@ -38,6 +38,8 @@ jobs:
   deploy:
     docker:
       - image: alpine:latest
+    steps:
+      - checkout
       - run:
           name: "Deploy image using ____"
           command: echo "Image deployed Successfully"  # awscli commands/create and upgrade helm charts/etc
