@@ -7,11 +7,24 @@ orbs:
 
 jobs:
   lint:
+    parameters:
+      preinstall-foo:
+        type: boolean
+        default: false
     docker:
       - image: alpine:latest
     steps:
       - checkout
-      - kelvin/lint
+      - run: echo "Preinstall is << parameters.preinstall-foo >>"
+      - when:
+          condition:  << parameters.preinstall-foo >>
+          steps:
+            - run: echo "Preinstall started"
+            - kelvin/lint
+      - unless:
+          condition: << parameters.preinstall-foo >>
+          steps:
+            - run: echo "Preinstall can't be started as preinstall-foo value is false"
   test:
     docker:
       - image: alpine:latest
