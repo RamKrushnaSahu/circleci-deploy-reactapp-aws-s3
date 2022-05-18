@@ -15,16 +15,22 @@ jobs:
       - image: alpine:latest
     steps:
       - checkout
-      - run: echo "Preinstall is << parameters.preinstall-foo >>"
+      - run: 
+          name: "Checking the when condition whether True or False"
+          command: echo "preinstall-foo parameter condition value is << parameters.preinstall-foo >>"
       - when:
           condition:  << parameters.preinstall-foo >>
           steps:
-            - run: echo "Preinstall started"
+            - run: 
+                name: "When condition meet to True"
+                command: echo "Preinstall started as preinstall-foo parameter condition value meet to True"
             - kelvin/lint
       - unless:
           condition: << parameters.preinstall-foo >>
           steps:
-            - run: echo "Preinstall can't be started as preinstall-foo value is false"
+            - run: 
+                name: "When condition meet to False"
+                command: echo "Preinstall can't be started as preinstall-foo parameter condition value is false"
   test:
     docker:
       - image: alpine:latest
