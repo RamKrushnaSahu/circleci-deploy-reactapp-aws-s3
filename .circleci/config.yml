@@ -10,7 +10,7 @@ jobs:
     parameters:
       preinstall-foo:
         type: boolean
-        default: false
+        default: true
     docker:
       - image: alpine:latest
     steps:
