@@ -1,4 +1,4 @@
-# CircleCi Pipeline with jobs - lint,test,build,deploy
+# CircleCi Pipeline with jobs - lint,test,build,deploy.
 
 version: 2.1
 
