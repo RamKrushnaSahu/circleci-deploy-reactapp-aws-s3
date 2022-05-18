@@ -1,4 +1,9 @@
+# CircleCi Pipeline with jobs - lint,test,build,deploy
+
 version: 2.1
+
+orbs:
+  kelvin: kelvinkfli/demo@1.0.0
 
 jobs:
   lint:
@@ -6,24 +11,13 @@ jobs:
       - image: alpine:latest
     steps:
       - checkout
-      - run:
-          name: "Installing linting tool"
-          command: echo "Installation Successful"
-      - run:
-          name: "Run linting on the Root directory"
-          command: echo "Linting Run Successful"
-          working_directory: "./"
+      - kelvin/lint
   test:
     docker:
       - image: alpine:latest
     steps:
       - checkout
-      - run:
-          name: "Run unit Tests"
-          command: echo "Unit Tests Passed"
-      - run:
-          name: "Run Integration Tests"
-          command: echo "Integration Tests Passed"
+      - kelvin/test
   build:
     docker:
       - image: alpine:latest
