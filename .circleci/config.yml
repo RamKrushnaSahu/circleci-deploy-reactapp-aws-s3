@@ -14,7 +14,19 @@ jobs:
             sudo apt-get update
             sudo apt install python3-pip
             sudo pip3 install awsebcli --upgrade
-      - run: cd ./app && npm install && ls -al && npm run build && ls -al
+      - run: 
+          name: "Build stage-Navigating to ./app folder & Installing npm & then doing ls"
+          commands: |
+            cd ./app
+            npm install
+            ls -al 
+      - run:
+          name: "Running npm build command to build React App then doing ls & then navigating to ./app/build to do ls"
+          commands: |
+            npm run build
+            ls -al
+            cd ./app/build
+            ls -al
       - persist_to_workspace:
           root: .
           paths:
@@ -26,7 +38,19 @@ jobs:
       - attach_workspace:
           at: .
       - checkout
-      - run: ls -al && cd ./app && ls -al && npm run test && ls -al && cd build && ls -al
+      - run: 
+          name: "Test stage-Doing ls & then navigating to ./app folder to do ls"
+          commands: |
+            ls -al
+            cd ./app
+            ls -al
+      -run:
+          name: "Running npm run test command to test the build that happened in build stage & then doing ls and then navigating to build folder to do ls"
+          commands: |
+            npm run test
+            ls -al
+            cd build
+            ls -al
       - persist_to_workspace:
           root: .
           paths:
@@ -38,8 +62,13 @@ jobs:
       - attach_workspace:
           at: .
       - checkout
-      - run: cd ./app/build && ls -al
-      - run: aws s3 sync ./app/build s3://react-app-cicd-deploy
+      - run: 
+          name: "Deploy stage-Navigating to ./app/build folder to do ls"
+          commands: |
+            cd ./app/build
+            ls -al
+      - run: 
+          name: "Deploying the React App build files to AWS S3 bucket named react-app-cicd-deploy"aws s3 sync ./app/build s3://react-app-cicd-deploy
 
 workflows:
   build_test_deploy:
