@@ -44,7 +44,7 @@ jobs:
             ls -al
             cd ./app
             ls -al
-      -run:
+      - run:
           name: "Running npm run test command to test the build that happened in build stage & then doing ls and then navigating to build folder to do ls"
           commands: |
             npm run test
