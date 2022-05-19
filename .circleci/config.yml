@@ -1,4 +1,4 @@
-# React App build,test & deployment through CircleCi pipeline to AWS S3 bucket.
+# React App build,test & deployment through CircleCi CICD Pipeline to AWS S3 bucket.
 
 version: 2.1
 
