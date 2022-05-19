@@ -68,7 +68,9 @@ jobs:
             cd ./app/build
             ls -al
       - run: 
-          name: "Deploying the React App build files to AWS S3 bucket named react-app-cicd-deploy"aws s3 sync ./app/build s3://react-app-cicd-deploy
+          name: "Deploying the React App build files to AWS S3 bucket named react-app-cicd-deploy"
+          commands:
+            aws s3 sync ./app/build s3://react-app-cicd-deploy
 
 workflows:
   build_test_deploy:
