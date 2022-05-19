@@ -16,13 +16,13 @@ jobs:
             sudo pip3 install awsebcli --upgrade
       - run: 
           name: "Build stage-Navigating to ./app folder & Installing npm & then doing ls"
-          commands: |
+          command: |
             cd ./app
             npm install
             ls -al 
       - run:
           name: "Running npm build command to build React App then doing ls & then navigating to ./app/build to do ls"
-          commands: |
+          command: |
             npm run build
             ls -al
             cd ./app/build
@@ -40,13 +40,13 @@ jobs:
       - checkout
       - run: 
           name: "Test stage-Doing ls & then navigating to ./app folder to do ls"
-          commands: |
+          command: |
             ls -al
             cd ./app
             ls -al
       - run:
           name: "Running npm run test command to test the build that happened in build stage & then doing ls and then navigating to build folder to do ls"
-          commands: |
+          command: |
             npm run test
             ls -al
             cd build
@@ -64,12 +64,12 @@ jobs:
       - checkout
       - run: 
           name: "Deploy stage-Navigating to ./app/build folder to do ls"
-          commands: |
+          command: |
             cd ./app/build
             ls -al
       - run: 
           name: "Deploying the React App build files to AWS S3 bucket named react-app-cicd-deploy"
-          commands:
+          command:
             aws s3 sync ./app/build s3://react-app-cicd-deploy
 
 workflows:
