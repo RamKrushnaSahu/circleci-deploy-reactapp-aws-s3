@@ -23,6 +23,7 @@ jobs:
       - run:
           name: "Running npm build command to build React App then doing ls & then navigating to ./app/build to do ls"
           command: |
+            cd ./app
             npm run build
             ls -al
             cd ./app/build
